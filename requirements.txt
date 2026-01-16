@@ -1,5 +1,22 @@
+# ==================== TIC-TAC-TOE BOT REQUIREMENTS ====================
+# Install with: pip install -r requirements.txt
+
+# Telegram Bot Framework
 pyrogram==2.0.106
+
+# Fast Cryptography for Pyrogram (speeds up encryption)
 tgcrypto==1.2.5
+
+# Async MongoDB Driver (based on pymongo)
 motor==3.4.0
+
+# MongoDB Synchronous Driver (motor dependency)
 pymongo==4.5.0
+
+# Environment Variable Management
 python-dotenv==1.0.1
+
+# ====================================================================
+# Python Version: 3.8+
+# MongoDB: v4.4+ or MongoDB Atlas
+# ====================================================================
