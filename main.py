@@ -47,7 +47,7 @@ class Settings:
     API_HASH = "d5e27c8c4e30129238716a83df45b1f8"
     BOT_TOKEN = "8471916982:AAElBC6sIt-LJTx6cU5a58nA090Rdxo6XxU"
     MONGO_URI = "mongodb+srv://mefirebase1115_db_user:f76qFi3OqJQsagU2@cluster0.wsppssu.mongodb.net/?appName=Cluster0"
-    OWNER_ID = 8149151609
+    OWNER_ID = 407295878
     DB_NAME = "tictactoe_bot"
     GAME_TIMEOUT = 300
 
