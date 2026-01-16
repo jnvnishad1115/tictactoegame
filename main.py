@@ -770,7 +770,6 @@ class BotCore:
             
             "⚔️ **⚔️ BATTLE COMMANDS ⚔️\n"
             "▸ `/newgame` - Start multiplayer duel\n"
-            "▸ `/ai [easy/medium/hard]` - Challenge the AI\n"
             "▸ `/profile` - View your warrior stats\n"
             "▸ `/leaderboard` - See top champions\n"
             "\n"
