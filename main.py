@@ -647,7 +647,15 @@ class BotCore:
                 reply_markup=self.ui.get_main_menu()  
             )  
         else:  
-            await message.reply("✅ Bot is active! Use /newgame to start.")  
+            await message.reply("🎮 **Ready to play Tic-Tac-Toe!**\n"
+"Start a new match with **/newgame**\n\n"
+"📖 **Commands:**\n"
+"• **/newgame** – Start a multiplayer game\n"
+"• **/ai** – Play against AI\n"
+"• **/profile** – View your stats\n"
+"• **/leaderboard** – Top players\n"
+"• **/help** – How to play\n\n"
+"🏆 May the best player win!")  
   
     async def handle_newgame(self, client: Client, message: Message):  
         logger.info(f"[COMMAND] /newgame from user {message.from_user.id} in group {message.chat.id}")
@@ -672,7 +680,8 @@ class BotCore:
             return  
       
         if await self.db.get_active_game(group_id):  
-            await message.reply("❌ A game is already active in this group!")  
+            await message.reply("❌ **A game is already running in this group.**\n"
+"👮‍♂️ Ask an **admin** to use **/resetgame** to restart it.")  
             return  
       
         # ==================== FIXED: Create user in database ====================
