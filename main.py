@@ -1290,7 +1290,7 @@ class BotCore:
             game["current_turn"] = "O" if game["current_turn"] == "X" else "X"
             
             await self.db.update_game(game["game_id"], {
-                "current_turn": game["current_turn"
+                "current_turn": game["current_turn"]
             })  
       
         # ==================== FIXED: Include theme in update ====================
