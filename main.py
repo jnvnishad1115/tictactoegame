@@ -1323,32 +1323,34 @@ class BotCore:
             self.ai_tasks[game["game_id"]] = task  
   
     async def _handle_ai_move(self, client: Client, message: Message, game: Dict):
-        lock = self.game_locks.setdefault(message.chat.id, asyncio.Lock())
-        async with lock:
-            
-            if not game.get("ai_symbol"):
-                logger.error("AI symbol missing, aborting AI move")
-                return
+
+    lock = self.game_locks.setdefault(message.chat.id, asyncio.Lock())
+    async with lock:
+
+        if not game.get("ai_symbol"):
+            logger.error("AI symbol missing, aborting AI move")
+            return
 
         # Notify user that AI is thinking
-            try:
-                await message.reply_chat_action(enums.ChatAction.TYPING)
-            except:
-                pass
+        try:
+            await message.reply_chat_action(enums.ChatAction.TYPING)
+        except:
+            pass
 
-            await asyncio.sleep(1.5)
+        await asyncio.sleep(1.5)
 
-            ai_symbol = game["ai_symbol"]
-            player_symbol = game["player_symbol"]
-            difficulty = game["ai_difficulty"]
+        ai_symbol = game["ai_symbol"]
+        player_symbol = game["player_symbol"]
+        difficulty = game["ai_difficulty"]
 
-            try:
-                row, col = await self.ai_engine.get_move(
-                    game["board"],
-                    difficulty,
-                    ai_symbol,
-                    player_symbol
-                )
+        try:
+            row, col = await self.ai_engine.get_move(
+                game["board"],
+                difficulty,
+                ai_symbol,
+                player_symbol
+            )
+
             if self.game_engine.make_move(game["board"], row, col, ai_symbol):
                 game["move_count"] += 1
 
@@ -1392,7 +1394,6 @@ class BotCore:
                             await self.db.update_user_stats(player["user_id"], "draw", client)
 
                 else:
-                    # Switch turn back to human
                     game["current_turn"] = player_symbol
 
                 # Persist game state
@@ -1421,13 +1422,11 @@ class BotCore:
         except Exception as e:
             logger.error(f"AI move execution error: {e}", exc_info=True)
 
-            # Fail-safe: count as loss for player
             player = game["players"]["X"]
             if player and player["user_id"] != client.me.id:
                 await self.db.update_user_stats(player["user_id"], "loss", client)
 
         finally:
-            # Cleanup AI task
             self.ai_tasks.pop(game["game_id"], None)
   
     async def _handle_join(self, client: Client, query: CallbackQuery):  
